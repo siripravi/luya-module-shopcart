@@ -8,8 +8,7 @@ use siripravi\shopcart\models\Cart;
 use yii\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 use ronashDhakal\cart\ItemInterface;
-use yz\shoppingcart\CartPositionInterface;
-use hscstudio\cart\ItemTrait;
+
 use Yii;
 
 /**
@@ -20,7 +19,7 @@ use Yii;
  */
 class OrderForm extends \luya\forms\Model implements ItemInterface
 {
-    use ItemTrait;
+    //use ItemTrait;
     /**
      * @var string The uniue form id
      */
