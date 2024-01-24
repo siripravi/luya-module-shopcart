@@ -10,6 +10,11 @@ use luya\helpers\StringHelper;
 use ronashDhakal\cart\ItemInterface;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+use Yii;
+
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 =======
 use Yii;
 
@@ -23,7 +28,11 @@ use Yii;
 class OrderForm extends \luya\forms\Model implements ItemInterface
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
    
+=======
+    //use ItemTrait;
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 =======
     //use ItemTrait;
 >>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
@@ -142,7 +151,11 @@ class OrderForm extends \luya\forms\Model implements ItemInterface
         return $this->Quantity;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function getPrice()
+=======
+    public function getCost()
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 =======
     public function getCost()
 >>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4

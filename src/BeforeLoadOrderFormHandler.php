@@ -127,7 +127,10 @@ class BeforeLoadOrderFormHandler
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
     
     /**
      * Converts objects to array
@@ -150,6 +153,9 @@ class BeforeLoadOrderFormHandler
         return $arr;
     }
 
+<<<<<<< HEAD
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
+=======
 >>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 }
 
