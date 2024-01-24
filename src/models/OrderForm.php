@@ -8,17 +8,8 @@ use siripravi\shopcart\models\Cart;
 use yii\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 use ronashDhakal\cart\ItemInterface;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 use Yii;
 
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
-=======
-use Yii;
-
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 /**
  * Form Submission Model
  *
@@ -27,15 +18,6 @@ use Yii;
  */
 class OrderForm extends \luya\forms\Model implements ItemInterface
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-   
-=======
-    //use ItemTrait;
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
-=======
-    //use ItemTrait;
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
     /**
      * @var string The uniue form id
      */
@@ -50,7 +32,7 @@ class OrderForm extends \luya\forms\Model implements ItemInterface
     public $Message;
 
     public $Image;
-
+   
 
     public $FeatureText;
     public $forNew = true;
@@ -150,15 +132,25 @@ class OrderForm extends \luya\forms\Model implements ItemInterface
     {
         return $this->Quantity;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    public function getCost($withDiscount = true)
+    {
+        $fsel = [];
+        $price = 0;
+        $qty = $this->Quantity;
+        foreach ($this->FeatureSel as $f => $v) {
+
+            $fsel[] = explode("+", $v);
+            $price += end($fsel)[3];
+        }
+        return $price;
+        //return $this->Price;
+    }
+
+    public function setQuantity($quantity){
+        $this->Quantity = $quantity;
+    }
     public function getPrice()
-=======
-    public function getCost()
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
-=======
-    public function getCost()
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
     {
         $fsel = [];
         $price = 0;

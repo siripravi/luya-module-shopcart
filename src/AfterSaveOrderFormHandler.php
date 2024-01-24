@@ -1,8 +1,8 @@
 <?php
 namespace siripravi\shopcart;
 use siripravi\shopcart\models\Cart;
+use siripravi\shopcart\models\CartOrder;
 use yii\helpers\ArrayHelper;
-use yz\shoppingcart\ShoppingCart;
 class AfterSaveOrderFormHandler
 {
     /**
@@ -15,6 +15,16 @@ class AfterSaveOrderFormHandler
     public static function handleAfterSave(\siripravi\shopcart\AfterSaveOrderFormEvent $event)
     {
         $model = $event->model;
+        $cartOrder = new CartOrder();
+        $cartOrder->id = $model->Pid;
+        $cartOrder->price = $model->getPrice();
+        $cartOrder->quantity = $model->getQuantity();
+        $cartOrder->message = $model->Message;
+        $cartOrder->delDate = $model->Delivery;
+        $cartOrder->image = $model->Image;
+        $cartOrder->name = $model->Name;
+        $cartOrder->featureText = $model->formatFText();
+        Cart::setCart($cartOrder->attributes);
       /*    $id = implode("+", $model->Features);
             $ftext = $model->FeatureText;
             $pid = $model->Pid;
@@ -29,21 +39,14 @@ class AfterSaveOrderFormHandler
             Cart::setCart($cart);
        */
         //** New Cart functionality with db save */
-        $shopping = new ShoppingCart();       
+    //    $shopping = new ShoppingCart();       
         //if ($model) {
            // $shopping->create($model, $model->Quantity);
-           \Yii::$app->cart->create($model, $model->Quantity);
+           \Yii::$app->cart->create($cartOrder, $model->Quantity);
        // }       
      //   $ycart = \Yii::$app->cart;
     //    $ycart->put($model, 1);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    Cart::setCart($model->attributes);
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
-=======
-    Cart::setCart($model->attributes);
->>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
+
         return true;
     }
 }

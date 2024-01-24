@@ -1,5 +1,5 @@
 <?php
-
+use siripravi\shopcart\models\Cart;
 use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 use kartik\touchspin\TouchSpin;
@@ -19,7 +19,9 @@ $moduleUrl = Url::toModule('shopcart', false);
 $opts = Json::htmlEncode([
   'urlUpdateCart' => $baseUrl . '/' . 'shopcart/default/update-cart',
 ]);
-
+echo "<pre>";
+print_r(Cart::getCart());
+echo "</pre>";
 
 $data = $this->extraValue('elements');
 $dataProvider = $data['dataProvider'];
@@ -90,18 +92,18 @@ JS;
             <div class="card-body p-4">
               <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-md-2 col-lg-2 col-xl-2">
-                  <img src="<?= $value->Image; ?>" class="img-fluid rounded-3" alt="">
+                  <img src="<?= $value->image; ?>" class="img-fluid rounded-3" alt="">
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
-                  <p class="lead fw-normal mb-2"><?= $value->Name; ?></p>
-                  <p><?= $value->formatFText(); ?><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                  <p class="lead fw-normal mb-2"><?= $value->name; ?></p>
+                  <p><?= $value->featureText; ?><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                   <?php
                   echo TouchSpin::widget([
                     'name' => 'qty' . $value->id,
                     'model' => $value,
-                    'attribute' => 'Quantity',
+                    'attribute' => 'quantity',
                     'readonly' => true,
                     'options' => [
                       'id' => 'id_qty' . $value->id
@@ -110,7 +112,7 @@ JS;
                       'verticalbuttons' => true,
                       'min' => 1,
                       'max' => 5000,
-                      'initval' => $value->getQuantity(),
+                      'initval' => $value->quantity,
                       'buttonup_class' => 'btn btn-primary',
                       'buttondown_class' => 'btn btn-info',
                       'buttonup_txt' => '<i class="fas fa-plus-circle"></i>',
@@ -135,7 +137,7 @@ JS;
                   </button>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                  <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->getPrice() * $value->Quantity; ?></span></text></h5>
+                  <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->price * $value->quantity; ?></span></text></h5>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                   <?= Html::a('<i class="bi bi-trash"></i>', $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id, [
