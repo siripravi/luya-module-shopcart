@@ -36,6 +36,7 @@ class AfterSaveOrderFormHandler
        // }       
      //   $ycart = \Yii::$app->cart;
     //    $ycart->put($model, 1);
+    Cart::setCart($model->attributes);
         return true;
     }
 }

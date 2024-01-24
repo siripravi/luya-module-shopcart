@@ -7,7 +7,7 @@ use siripravi\ecommerce\models\Article;
 use siripravi\shopcart\models\Cart;
 use yii\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
-
+use ronashDhakal\cart\ItemInterface;
 use yz\shoppingcart\CartPositionInterface;
 use hscstudio\cart\ItemTrait;
 use Yii;
@@ -18,7 +18,7 @@ use Yii;
  * @author Basil Suter <git@nadar.io>
  * @since 1.0.0
  */
-class OrderForm extends \luya\forms\Model implements CartPositionInterface
+class OrderForm extends \luya\forms\Model implements ItemInterface
 {
     use ItemTrait;
     /**
@@ -135,7 +135,7 @@ class OrderForm extends \luya\forms\Model implements CartPositionInterface
     {
         return $this->Quantity;
     }
-    public function getPrice()
+    public function getCost()
     {
         $fsel = [];
         $price = 0;
