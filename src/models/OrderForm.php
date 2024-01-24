@@ -9,6 +9,11 @@ use yii\helpers\ArrayHelper;
 use luya\helpers\StringHelper;
 use ronashDhakal\cart\ItemInterface;
 
+<<<<<<< HEAD
+=======
+use Yii;
+
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
 /**
  * Form Submission Model
  *
@@ -17,7 +22,11 @@ use ronashDhakal\cart\ItemInterface;
  */
 class OrderForm extends \luya\forms\Model implements ItemInterface
 {
+<<<<<<< HEAD
    
+=======
+    //use ItemTrait;
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
     /**
      * @var string The uniue form id
      */
@@ -132,7 +141,11 @@ class OrderForm extends \luya\forms\Model implements ItemInterface
     {
         return $this->Quantity;
     }
+<<<<<<< HEAD
     public function getPrice()
+=======
+    public function getCost()
+>>>>>>> 298f0e58eca22316db71aefa310eb45359ec34b4
     {
         $fsel = [];
         $price = 0;
