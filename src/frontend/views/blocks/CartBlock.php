@@ -86,7 +86,7 @@ JS;
         </div>
         <!--  BEGIN OF CART ITEMS CONTAINER  -->
         <?php foreach ($dataShopping as $value) : ?>
-
+            <?php $delUrl = $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id; ?>
           <!--  CARD PRODUCT BEGIN  -->
           <div class="card rounded-3 mb-4">
             <div class="card-body p-4">
@@ -140,10 +140,12 @@ JS;
                   <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->price * $value->quantity; ?></span></text></h5>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                  <?= Html::a('<i class="bi bi-trash"></i>', $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id, [
+                  <?= Html::a('<i class="bi bi-trash"></i>',"#" , [
                     'title'                => Yii::t('app', "Delete"),
-                    // 'class'                => 'btn btn-danger',
-                    'role'                 => 'modal-remote',
+                    "data-mdb-popconfirm-mode"=>"modal",
+                    'class'=>'popconfirm-toggle',
+                    "data-mdb-message"=>"Are you sure?",
+                    'role'                 => 'modal-remote',                   
                     'data-confirm'         => false,
                     'data-method'          => false,
                     'data-request-method'  => 'post',
