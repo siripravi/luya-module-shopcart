@@ -17,7 +17,7 @@ class CartOrder extends \luya\base\DynamicModel implements ItemInterface
     public $name;
     public function getPrice()
     {
-        return $this->price;
+        return $this->price * $this->quantity;
     }
 
     public function getId()
@@ -31,8 +31,9 @@ class CartOrder extends \luya\base\DynamicModel implements ItemInterface
 
     public function getCost($withDiscount = true)
     {
-               return $this->price;
+               return $this->price * $this->quantity;
     }    
+    
     public function getQuantity()
     {
         return $this->quantity;

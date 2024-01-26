@@ -4,11 +4,8 @@ namespace siripravi\shopcart\frontend\controllers;
 
 use Yii;
 use yii\data\ArrayDataProvider;
-use yz\shoppingcart\ShoppingCart;
 use siripravi\ecommerce\models\Article;
 use yii\web\Response;
-use yii\helpers\ArrayHelper;
-use kartik\grid\EditableColumnAction;
 use yii\web\NotFoundHttpException;
 use app\modules\userauth\models\UserAddress;
 use yii\helpers\Json;
@@ -186,11 +183,11 @@ class DefaultController extends \yii\web\Controller
 
         if(isset($_POST['cart']) && isset($_POST['cart_id'])){
 			$item = $cart->getItemById($_POST['cart_id']);
-            $item->Quantity = $_POST['cart'];
-            $item->Price = $_POST['cart'] * $item->Price;
-           // return Json::encode($item);
+            $item->quantity = $_POST['cart'];
+          //  $item->price = $item->price;
+           // return Json::encode($item->attributes);
             Yii::$app->cart->update($item,$_POST['cart']);
-			return Json::encode($item);
+			return Json::encode($item->attributes);
         }
         throw new NotFoundHttpException();
     }

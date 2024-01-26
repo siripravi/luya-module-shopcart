@@ -3,8 +3,9 @@ use siripravi\shopcart\models\Cart;
 use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 use kartik\touchspin\TouchSpin;
-
+use yii2ajaxcrud\ajaxcrud\CrudAsset;
 use luya\cms\helpers\Url;
+use yii\bootstrap5\Modal;
 
 use yii\helpers\Json;
 
@@ -12,7 +13,17 @@ $this->title = Yii::t('app', 'Checkout');
 $this->params['breadcrumbs'][] = $this->title;
 $url = $this->extraValue('ajaxLinkToTestAjax');
 
+CrudAsset::register($this);
+Modal::begin([
+    "id" => "ajaxCrudModal",
+    "options" => [
+        'data-backdrop' => "static",
+        'data-keyboard' => false,
+    ],
+    "footer" => "", // always need it for jquery plugin
+]);
 
+Modal::end();
 $baseUrl = Url::base(true);
 
 $moduleUrl = Url::toModule('shopcart', false);
@@ -27,21 +38,26 @@ $data = $this->extraValue('elements');
 $dataProvider = $data['dataProvider'];
 $dataShopping = $data['dataShopping'];
 $defaultAddress = $data['defaultAddress'];
-$total = $data['total'];
-/*
+$total = Yii::$app->cart->getCost(); //$data['total'];
+
 $defaultAddress = $this->extraValue('defaultAddress');
-$cartPositions = $dataShopping->getPositions();
-
-?>
-
+//$cartPositions = $dataShopping->getPositions();
+/*
 $opts = Json::htmlEncode([
     'urlUpdateCart' => Url::to(['update-cart']),
+]);*/
+
+$baseUrl = Url::base(true);
+
+$moduleUrl = Url::toModule('shopcart', false);
+$opts = Json::htmlEncode([
+  'urlUpdateCart' => $baseUrl . '/' . 'shopcart/default/update-cart',
 ]);
 $this->registerJs("var _opts = {$opts};", \yii\web\View::POS_HEAD);
 
 /*register select2 javascript ajax custom*/
-//$this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
-//$this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
+$this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
+$this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
 
 /*echo "<pre>";
 print_r($dataShopping);
@@ -126,7 +142,7 @@ JS;
                     ],
                   ]);
                   ?>
-                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+               <!--   <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                     <i class="fas fa-minus"></i>
                   </button>
 
@@ -134,18 +150,16 @@ JS;
 
                   <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                     <i class="fas fa-plus"></i>
-                  </button>
+                  </button>  -->
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                   <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->price * $value->quantity; ?></span></text></h5>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                  <?= Html::a('<i class="bi bi-trash"></i>',"#" , [
+                <?= Html::a('<i class="bi bi-trash"></i>', $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id, [
                     'title'                => Yii::t('app', "Delete"),
-                    "data-mdb-popconfirm-mode"=>"modal",
-                    'class'=>'popconfirm-toggle',
-                    "data-mdb-message"=>"Are you sure?",
-                    'role'                 => 'modal-remote',                   
+                    // 'class'                => 'btn btn-danger',
+                    'role'                 => 'modal-remote',
                     'data-confirm'         => false,
                     'data-method'          => false,
                     'data-request-method'  => 'post',

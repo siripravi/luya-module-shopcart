@@ -25,13 +25,13 @@ class BeforeLoadOrderFormEvent extends Event
     /**
      * @var SubmissionEmail
      */
-    public $submission;
+    //public $submission;
 
     /**
      * @var Form
      */
-    public $form;
-    public $model;
+    //public $form;
+    //public $model;
 
     private $_model;
 

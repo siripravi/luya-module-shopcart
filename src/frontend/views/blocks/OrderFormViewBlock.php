@@ -15,8 +15,9 @@ use luya\helpers\Html;
 $price = 0;
 $fsel = [];
 
-//echo "<pre>VVV"; print_r($model->attributes); echo "</pre>";
+
 $model = $this->extraValue("summary");
+//echo "<pre>VVV"; print_r($model->Delivery); echo "</pre>";
 $i = -1;
 foreach ($model->FeatureSel as $f => $v) {
     $i++;
@@ -29,7 +30,12 @@ foreach ($model->FeatureSel as $f => $v) {
 <?php if (Yii::$app->session->getFlash('formDataSuccess')) : ?>
     <?= $this->placeholderValue('success'); ?>
 <?php else : ?>
-
+    <div clas="row">
+        <div id="async" class="form-outline autocomplete">
+            <input type="text" id="form2" class="form-control">
+            <label class="form-label" for="form2">Your Pincode</label>
+        </div>
+    </div>
     <div class="row">
         <h3 class="w-75 p-3"><span style="vertical-align:super;font-size:31px; padding-right:5px;" class="moneySymbol">₹</span>
             <span class="" data-inr="<?= $price; ?>" style="font-size: 48px; font-weight: 600;" id="xproductPrice"><?= $price; ?></span>

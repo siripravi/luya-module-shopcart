@@ -92,6 +92,8 @@ class CartBlock extends PhpBlock
     {
         $cart = \Yii::$app->cart;
         $products = $cart->getItems();
+        
+       // echo \Yii::$app->user->id;print_r($products);die;
         $total = $cart->getCost();
 //Yii::$app->storage->getImage($element->image_id)->applyFilter(\app\filters\ThumbFilter::identifier())->source
         $dataProvider = new ArrayDataProvider([
