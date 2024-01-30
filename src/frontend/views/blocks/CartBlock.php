@@ -30,9 +30,6 @@ $moduleUrl = Url::toModule('shopcart', false);
 $opts = Json::htmlEncode([
   'urlUpdateCart' => $baseUrl . '/' . 'shopcart/default/update-cart',
 ]);
-echo "<pre>";
-print_r(Cart::getCart());
-echo "</pre>";
 
 $data = $this->extraValue('elements');
 $dataProvider = $data['dataProvider'];
@@ -59,13 +56,8 @@ $this->registerJs("var _opts = {$opts};", \yii\web\View::POS_HEAD);
 $this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
 $this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
 
-/*echo "<pre>";
-print_r($dataShopping);
-echo "</pre>";  */
-
 ?>
 
-<h2>Content</h2>
 <?php
 $js = <<< JS
 /*$('.list-link').click(function(){
