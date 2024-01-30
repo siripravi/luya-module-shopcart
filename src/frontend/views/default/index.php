@@ -30,11 +30,7 @@ $this->registerJs("var _opts = {$opts};", \yii\web\View::POS_HEAD);
 /*register select2 javascript ajax custom*/
 $this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
 $this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
-/*
-echo "<pre>";
-print_r($dataShopping->getPositions());
-echo "</pre>";  die;
-*/
+
 ?>
 
 <h2>Content</h2>
