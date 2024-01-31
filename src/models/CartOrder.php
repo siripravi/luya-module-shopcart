@@ -19,7 +19,6 @@ class CartOrder extends \luya\base\DynamicModel implements ItemInterface
     {
         return $this->price * $this->quantity;
     }
-
     public function getId()
     {
         return $this->id;
