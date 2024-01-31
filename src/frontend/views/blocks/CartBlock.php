@@ -1,11 +1,10 @@
 <?php
-use siripravi\shopcart\models\Cart;
+
 use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 use kartik\touchspin\TouchSpin;
-use yii2ajaxcrud\ajaxcrud\CrudAsset;
+
 use luya\cms\helpers\Url;
-use yii\bootstrap5\Modal;
 
 use yii\helpers\Json;
 
@@ -13,51 +12,42 @@ $this->title = Yii::t('app', 'Checkout');
 $this->params['breadcrumbs'][] = $this->title;
 $url = $this->extraValue('ajaxLinkToTestAjax');
 
-CrudAsset::register($this);
-Modal::begin([
-    "id" => "ajaxCrudModal",
-    "options" => [
-        'data-backdrop' => "static",
-        'data-keyboard' => false,
-    ],
-    "footer" => "", // always need it for jquery plugin
-]);
 
-Modal::end();
 $baseUrl = Url::base(true);
 
 $moduleUrl = Url::toModule('shopcart', false);
 $opts = Json::htmlEncode([
   'urlUpdateCart' => $baseUrl . '/' . 'shopcart/default/update-cart',
 ]);
+
 
 $data = $this->extraValue('elements');
 $dataProvider = $data['dataProvider'];
 $dataShopping = $data['dataShopping'];
 $defaultAddress = $data['defaultAddress'];
-$total = Yii::$app->cart->getCost(); //$data['total'];
-
-$defaultAddress = $this->extraValue('defaultAddress');
-//$cartPositions = $dataShopping->getPositions();
+$total = $data['total'];
 /*
+$defaultAddress = $this->extraValue('defaultAddress');
+$cartPositions = $dataShopping->getPositions();
+
+?>
+
 $opts = Json::htmlEncode([
     'urlUpdateCart' => Url::to(['update-cart']),
-]);*/
-
-$baseUrl = Url::base(true);
-
-$moduleUrl = Url::toModule('shopcart', false);
-$opts = Json::htmlEncode([
-  'urlUpdateCart' => $baseUrl . '/' . 'shopcart/default/update-cart',
 ]);
 $this->registerJs("var _opts = {$opts};", \yii\web\View::POS_HEAD);
 
 /*register select2 javascript ajax custom*/
-$this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
-$this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
+//$this->registerJs($this->render('_select2_ajax.js'), \yii\web\View::POS_HEAD);
+//$this->registerJs($this->render('_ajax_update_cart.js'), \yii\web\View::POS_HEAD);
+
+/*echo "<pre>";
+print_r($dataShopping);
+echo "</pre>";  */
 
 ?>
 
+<h2>Content</h2>
 <?php
 $js = <<< JS
 /*$('.list-link').click(function(){
@@ -94,24 +84,24 @@ JS;
         </div>
         <!--  BEGIN OF CART ITEMS CONTAINER  -->
         <?php foreach ($dataShopping as $value) : ?>
-            <?php $delUrl = $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id; ?>
+
           <!--  CARD PRODUCT BEGIN  -->
           <div class="card rounded-3 mb-4">
             <div class="card-body p-4">
               <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-md-2 col-lg-2 col-xl-2">
-                  <img src="<?= $value->image; ?>" class="img-fluid rounded-3" alt="">
+                  <img src="<?= $value->Image; ?>" class="img-fluid rounded-3" alt="">
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
-                  <p class="lead fw-normal mb-2"><?= $value->name; ?></p>
-                  <p><?= $value->featureText; ?><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                  <p class="lead fw-normal mb-2"><?= $value->Name; ?></p>
+                  <p><?= $value->formatFText(); ?><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                   <?php
                   echo TouchSpin::widget([
                     'name' => 'qty' . $value->id,
                     'model' => $value,
-                    'attribute' => 'quantity',
+                    'attribute' => 'Quantity',
                     'readonly' => true,
                     'options' => [
                       'id' => 'id_qty' . $value->id
@@ -120,7 +110,7 @@ JS;
                       'verticalbuttons' => true,
                       'min' => 1,
                       'max' => 5000,
-                      'initval' => $value->quantity,
+                      'initval' => $value->getQuantity(),
                       'buttonup_class' => 'btn btn-primary',
                       'buttondown_class' => 'btn btn-info',
                       'buttonup_txt' => '<i class="fas fa-plus-circle"></i>',
@@ -134,7 +124,7 @@ JS;
                     ],
                   ]);
                   ?>
-               <!--   <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                  <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                     <i class="fas fa-minus"></i>
                   </button>
 
@@ -142,13 +132,13 @@ JS;
 
                   <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                     <i class="fas fa-plus"></i>
-                  </button>  -->
+                  </button>
                 </div>
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                  <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->price * $value->quantity; ?></span></text></h5>
+                  <h5 class="mb-0"> <text class="h4"><span class="moneySymbol">₹</span><span class="cart-item-total ps-2"><?= $value->getPrice() * $value->Quantity; ?></span></text></h5>
                 </div>
                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <?= Html::a('<i class="bi bi-trash"></i>', $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id, [
+                  <?= Html::a('<i class="bi bi-trash"></i>', $baseUrl . "/" . $moduleUrl . "/default/delete-order?id=" . $value->id, [
                     'title'                => Yii::t('app', "Delete"),
                     // 'class'                => 'btn btn-danger',
                     'role'                 => 'modal-remote',
