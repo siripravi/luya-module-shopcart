@@ -74,11 +74,11 @@ $this->registerJs($js);
                 <td>
                     <?php if (isset($item->product->image)) : ?>
                         <!--Html::img(ImageHelper::thumb($item->product->image->id, 'micro'), ['height' => '70'])-->
-                    <?= Html::a("[IMAGE]", ['/catalog/product/index', 'slug' => $item->product->slug]) ?>
+                    <?= Html::a("[IMAGE]", ['/ecommerce/product/index', 'slug' => $item->product->slug]) ?>
                     <?php endif; ?>
                 </td>
                 <td class="text-left">
-                    <?= Html::a($item->product->name, ['/catalog/product/index', 'slug' => $item->product->slug]) ?>
+                    <?= Html::a($item->product->name, ['/ecommerce/product/index', 'slug' => $item->product->slug]) ?>
                 </td>
                 <td>
                     <?= $item->name ?>

@@ -308,7 +308,7 @@ class Order extends NgRestModel
          /*   foreach ($this->products as $product) {
                 $products[] = [
                     'imageUrl' => null,//$product->image ? Url::to(ImageHelper::thumb($product->image->id, 'micro'), 'https') : null,
-                    'url' => Url::to(['/catalog/product/index', 'slug' => $product->product->slug], 'https'),
+                    'url' => Url::to(['/ecommerce/product/index', 'slug' => $product->product->slug], 'https'),
                     'name' => $this->cartItemName[$product->id],
                     'cost' => $this->cartItemPrice[$product->id],
                     'quantity' => $this->cartItemCount[$product->id],
