@@ -101,7 +101,7 @@ JS;
                   echo TouchSpin::widget([
                     'name' => 'qty' . $value->id,
                     'model' => $value,
-                    'attribute' => 'Quantity',
+                    'attribute' => 'quantity',
                     'readonly' => true,
                     'options' => [
                       'id' => 'id_qty' . $value->id
