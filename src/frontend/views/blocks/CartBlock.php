@@ -248,8 +248,7 @@ JS;
         </div>
       <?php } ?>
       <?php \yii\widgets\Pjax::end(); ?>
-    </div>
-  
+    </div>  
     <!-- cart -->
     <!-- summary -->
     <div class="col-lg-3">
