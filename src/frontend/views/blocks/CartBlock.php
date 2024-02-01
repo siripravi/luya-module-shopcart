@@ -93,7 +93,7 @@ JS;
                   <img src="<?= $value->image; ?>" class="img-fluid rounded-3" alt="">
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
-                  <p class="lead fw-normal mb-2"><?= $value->phone_numberame; ?></p>
+                  <p class="lead fw-normal mb-2"><?= $value->phone_number; ?></p>
                   <p><?= $value->formatFText(); ?><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
