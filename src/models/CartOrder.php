@@ -5,7 +5,7 @@ use ronashDhakal\cart\ItemInterface;
 use ronashDhakal\cart\ItemTrait;
 class CartOrder extends \luya\base\DynamicModel implements ItemInterface
 {
-    use ItemTrait;
+   use ItemTrait;
    public $id;
    public $quantity;
    public $price;
